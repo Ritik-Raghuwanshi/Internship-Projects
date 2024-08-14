@@ -1,21 +1,21 @@
-import User from "../models/user.model";
+import {User} from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const register = async(req, res) => {
     try {
-        const {fullname, email, phoneNumber, password, role} = req.body;
-        if ( !fullname || !email || !phoneNumber || !password || !role) {
+        const { fullname, email, phoneNumber, password, role } = req.body;
+        if (!fullname || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({
-                message:"Something is missing",
-                success:false
+                message: "Something is missing",
+                success: false
             });
         };
-        const user = await User.findOne({email});
+        const user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({
-                message:"User already exist with thi email.",
-                success:false,
+                message: "User already exists with this email.",
+                success: false,
             });
         };
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,8 +28,8 @@ export const register = async(req, res) => {
         });
 
         return res.status(201).json({
-            message:"Account created succesfullt.",
-            success:true,
+            message: "Account created successfully.",
+            success: true,
         })
     } catch (error) {
         console.log(error);
@@ -38,56 +38,56 @@ export const register = async(req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const {email, password, role} = req.body;
-        if (!email || password || !role) {
+        const { email, password, role } = req.body;
+        if (!email || !password || !role) {
             return res.status(400).json({
-                message:"Something is missing",
-                success:false
+                message: "Something is missing",
+                success: false
             });
         };
 
-        let user = await User.findOne({email});
+        let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({
-                message:"Incorrect email or password",
-                success:false,
+                message: "Incorrect email or password",
+                success: false,
             })
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
             return res.status(400).json({
-                message:"Incorrect email or password",
-                success:false,
+                message: "Incorrect email or password",
+                success: false,
             })
         }
 
-        //check role is correct or not
-        if(role !== user.role) {
+        // Check if role matches
+        if (role !== user.role) {
             return res.status(400).json({
-                message:"Account dosen't exist with current role.",
-                success:false
+                message: "Account doesn't exist with the current role.",
+                success: false
             })
         };
 
         const tokenData = {
-            userId:user._id,
+            userId: user._id,
         }
 
-        const token = await jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn: '1d'});
+        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
 
         user = {
-            _id:user._id,
-            fullname:user.fullname,
-            email:user.email,
-            phoneNumber:user.phoneNumber,
-            role:user.role,
-            profile:user.profile,
+            _id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            role: user.role,
+            profile: user.profile,
         }
 
-        return res.status(200).cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'strict'}).json({
-            message:`Welcome back ${user.fullname}`,
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
+            message: `Welcome back ${user.fullname}`,
             user,
-            success:true,
+            success: true,
         })
     } catch (error) {
         console.log(error);
@@ -96,9 +96,9 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        return res.status(200).cookie("token", "", {maxAge:0}).json({
-            message:"Logged out successfully.",
-            success:true,
+        return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+            message: "Logged out successfully.",
+            success: true,
         })
     } catch (error) {
         console.log(error);
@@ -107,52 +107,52 @@ export const logout = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const {fullname, email, phoneNumber, bio, skills} = req.body;
+        const { fullname, email, phoneNumber, bio, skills } = req.body;
         const file = req.file;
         if (!fullname || !email || !phoneNumber || !bio || !skills) {
             return res.status(400).json({
                 message: "Something is missing",
-                success:false, 
+                success: false,
             });
         };
 
-        //cloudianary come here 
+        // Cloudinary will be integrated here
 
         const skillsArray = skills.split(",");
-        const userId  = req.id //middleware authentication
+        const userId = req.id; // Middleware authentication
         let user = await User.findById(userId);
 
         if (!user) {
             return res.status(400).json({
-                message:"User not found.",
-                success:false,
+                message: "User not found.",
+                success: false,
             });
         };
 
-        //updating data
-        user.fullname = fullname,
-        user.email = email,
-        user.phoneNumber = phoneNumber,
-        user.profile.bio = bio,
-        user.profile.skills = skillsArray,
+        // Updating data
+        user.fullname = fullname;
+        user.email = email;
+        user.phoneNumber = phoneNumber;
+        user.profile.bio = bio;
+        user.profile.skills = skillsArray;
 
-        //resume section will setup later
+        // Resume section will be set up later
 
         await user.save();
 
         user = {
-            _id:user._id,
-            fullname:user.fullname,
-            email:user.email,
-            phoneNumber:user.phoneNumber,
-            role:user.role,
-            profile:user.profile,
+            _id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            role: user.role,
+            profile: user.profile,
         }
 
         return res.status(200).json({
-            message:"Profile updated succesfully.",
+            message: "Profile updated successfully.",
             user,
-            success:true,
+            success: true,
         })
 
     } catch (error) {
