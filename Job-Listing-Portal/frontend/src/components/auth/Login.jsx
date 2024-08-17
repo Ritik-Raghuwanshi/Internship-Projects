@@ -5,8 +5,13 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup } from "../ui/radio-group";
 import { useState } from "react";
+import axios from "axios";
+import { USER_API_END_POINT } from "../utils/constant";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [input, setInput] = useState({ 
         email:'',
         password:'',
@@ -16,10 +21,26 @@ const Login = () => {
     const changeEventHandler = (e) => {
         setInput({...input, [e.target.name]:e.target.value});
     };
+    
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(input);
+
+        try {
+            const res = await axios.get(`${USER_API_END_POINT}/login`, input, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+            if(res.data.success) {
+                navigate("/"); 
+                toast.success(res.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
     }
     return (
       <div>
