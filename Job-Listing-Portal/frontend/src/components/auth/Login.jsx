@@ -9,9 +9,14 @@ import axios from "axios";
 import { USER_API_END_POINT } from "../utils/constant";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../redux/authSlice";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {loading} = useSelector(store => store.auth);
     const [input, setInput] = useState({ 
         email:'',
         password:'',
@@ -27,11 +32,12 @@ const Login = () => {
         e.preventDefault();
 
         try {
+          dispatch(setLoading(true));
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                withCredentials: true,
+                withCredentials: true ,
             });
             if(res.data.success) {
                 navigate("/"); 
@@ -40,6 +46,8 @@ const Login = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
+        } finally {
+          dispatch(setLoading(false));
         }
     }
     return (
@@ -81,7 +89,7 @@ const Login = () => {
                     type="radio"
                     name="role"
                     value="student"
-                    checked={input.role === 'student'}
+                    checked={input.role === "student"}
                     onChange={changeEventHandler}
                     className="cursor-pointer"
                   />
@@ -92,7 +100,7 @@ const Login = () => {
                     type="radio"
                     name="role"
                     value="recruiter"
-                    checked={input.role === 'recruiter'}
+                    checked={input.role === "recruiter"}
                     onChange={changeEventHandler}
                     className="cursor-pointer"
                   />
@@ -100,9 +108,16 @@ const Login = () => {
                 </div>
               </RadioGroup>
             </div>
-            <Button type="submit" className="w-full my-4">
-              Login
-            </Button>
+            {loading ? (
+              <Button className='w-full my-4'>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> please wait
+              </Button>
+            ) : (
+              <Button type="submit" className="w-full my-4">
+                Login
+              </Button>
+            )}
+
             <span className="text-sm">
               Don&apos;t have an account?{" "}
               <Link className="text-blue-600" to="/signup">
