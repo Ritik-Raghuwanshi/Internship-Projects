@@ -1,5 +1,5 @@
 import CategoryCarousel from "./CategoryCarousel";
-import Footer from "./Footer";
+import Footer from "./shared/Footer";
 import HeroSection from "./HeroSection";
 import LatestJobs from "./LatestJobs";
 import Navbar from "./shared/Navbar";
