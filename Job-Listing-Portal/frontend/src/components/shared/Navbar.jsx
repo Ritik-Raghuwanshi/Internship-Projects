@@ -16,9 +16,9 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-12">
           <ul className="flex font-medium items-center gap-5">
-            <li className="hover:text-indigo-500">Home</li>
-            <li className="hover:text-indigo-500">Jobs</li>
-            <li className="hover:text-indigo-500">Browse</li>
+            <li className="hover:text-indigo-500"><Link to='/'>Home</Link></li>
+            <li className="hover:text-indigo-500"><Link to='/jobs'>Jobs</Link></li>
+            <li className="hover:text-indigo-500"><Link >Browse</Link></li>
           </ul>
 
           {
