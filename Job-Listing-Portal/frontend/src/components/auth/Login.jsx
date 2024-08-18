@@ -27,7 +27,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.get(`${USER_API_END_POINT}/login`, input, {
+            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
                     "Content-Type": "application/json",
                 },
