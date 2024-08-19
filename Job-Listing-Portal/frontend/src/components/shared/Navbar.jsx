@@ -56,7 +56,7 @@ const Navbar = () => {
                   <div className="flex flex-col gap-3 my-2 text-gray-600">
                     <div className="flex w-fit items-center cursor-pointer">
                     <User2 />
-                    <Button variant='link'>View Profile</Button>
+                    <Button variant='link'><Link to='/profile'>View Profile</Link></Button>
                     </div>
                     <div className="flex w-fit items-center cursor-pointer">
                     <LogOut />
