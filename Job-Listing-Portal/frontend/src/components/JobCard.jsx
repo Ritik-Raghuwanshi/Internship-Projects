@@ -2,7 +2,6 @@
 import { Bookmark } from "lucide-react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "./ui/avatar";
-import Applogo from "/logo.png";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +28,8 @@ const JobCard = ( {job} ) => {
       <div className="flex items-center gap-2 my-2">
         <Button className="p-6" variant="outline" size="icon">
           <Avatar>
-            <AvatarImage src={Applogo} />
+            <AvatarImage src={job?.company?.logo} />
+
           </Avatar>
         </Button>
         <div>
