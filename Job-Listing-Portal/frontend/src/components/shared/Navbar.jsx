@@ -1,5 +1,5 @@
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -77,19 +77,31 @@ const Navbar = () => {
             <Popover>
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
-                  <AvatarImage
-                    src={user?.profile?.profilePhoto}
-                    alt="@shadcn"
-                  />
+                  {user?.profile?.profilePhoto ? (
+                    <AvatarImage
+                      src={user?.profile?.profilePhoto}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <AvatarFallback>
+                      <User2 />
+                    </AvatarFallback>
+                  )}
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="flex gap-2 space-y-2">
                   <Avatar className="cursor-pointer">
-                    <AvatarImage
-                      src={user?.profile?.profilePhoto}
-                      alt="@shadcn"
-                    />
+                    {user?.profile?.profilePhoto ? (
+                      <AvatarImage
+                        src={user?.profile?.profilePhoto}
+                        alt="Profile"
+                      />
+                    ) : (
+                      <AvatarFallback>
+                        <User2 />
+                      </AvatarFallback>
+                    )}
                   </Avatar>
                   <div>
                     <h4 className="font-medium">{user?.fullname}</h4>
@@ -99,14 +111,13 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 my-2 text-gray-600">
-                  {
-                    user && user.role === "student" && (
-                      <div className="flex w-fit items-center cursor-pointer">
-                        <User2 />
-                          <Button variant="link">
-                          <Link to="/profile">View Profile</Link>
-                        </Button>
-                      </div>
+                  {user && user.role === "student" && (
+                    <div className="flex w-fit items-center cursor-pointer">
+                      <User2 />
+                      <Button variant="link">
+                        <Link to="/profile">View Profile</Link>
+                      </Button>
+                    </div>
                   )}
 
                   <div className="flex w-fit items-center cursor-pointer">
