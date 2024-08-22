@@ -104,34 +104,40 @@ export const getApplicants = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
     try {
-        const {status} = req.body;
+        const { status } = req.body;
         const applicationId = req.params.id;
-        if (!status) {
-            return res.status(404).json({
-                message:"Status required",
-                success:false,
-            });
-        };
 
-        //find the application by application id
-        const application = await Application.findOne({_id:applicationId});
-        if(!application) {
-            return res.status(404).json({
-                message:"Application not found",
-                success:false
+        // Check if status exists and is a string
+        if (!status || typeof status !== 'string') {
+            return res.status(400).json({
+                message: "Status is required and should be a string.",
+                success: false,
             });
-        };
+        }
 
-        //update status
+        // Find the application by application ID
+        const application = await Application.findOne({ _id: applicationId });
+        if (!application) {
+            return res.status(404).json({
+                message: "Application not found",
+                success: false,
+            });
+        }
+
+        // Update status
         application.status = status.toLowerCase();
         await application.save();
 
         return res.status(200).json({
-            message:"Status updated successfully.",
-            success:true
+            message: "Status updated successfully.",
+            success: true,
         });
 
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: 'Internal Server Error',
+            success: false,
+        });
     }
-}
+};
