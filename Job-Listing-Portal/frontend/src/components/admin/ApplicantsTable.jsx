@@ -10,6 +10,9 @@ import {
   TableRow,
 } from "../ui/table";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
+import axios from "axios";
+import { APPLICATION_API_END_POINT } from "../utils/constant";
 
 const shortListingStatus = [
   { icon: <Check className="size-4" />, label: "Accepted" },
@@ -18,6 +21,18 @@ const shortListingStatus = [
 
 const ApplicantsTable = () => {
   const { applicants } = useSelector((store) => store.application);
+
+  const statusHandler = async (status, id) => {
+    try {
+      axios.defaults.withCredentials = true;
+      const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`, {status});
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
   return (
     <div>
       <Table>
@@ -63,9 +78,9 @@ const ApplicantsTable = () => {
                     <PopoverContent className="w-32">
                       {shortListingStatus.map((status, index) => {
                         return (
-                          <div key={index} className="flex items-center my-1">
-                            <span className="pr-2">{status.icon}</span>
-                            <span>{status.label}</span>
+                          <div onClick={() => statusHandler(status.label, item?._id)} key={index} className="flex items-center my-1">
+                            <span className="pr-2 cursor-pointer">{status.icon}</span>
+                            <span className="cursor-pointer">{status.label}</span>
                           </div>
                         );
                       })}
