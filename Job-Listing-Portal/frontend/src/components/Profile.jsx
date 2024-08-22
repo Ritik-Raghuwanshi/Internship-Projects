@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 const isResume = true;
 
 const Profile = () => {
-  const {user} = useSelector(store=>store.auth);
+  const { user } = useSelector((store) => store.auth);
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -27,7 +27,11 @@ const Profile = () => {
         <div className="flex justify-between">
           <div className="flex items-center gap-4">
             <Avatar className="h-24 w-24">
-              <AvatarImage src={ProfileLogo} />
+              {user?.profile?.profilePhoto ? (
+                <AvatarImage src={user?.profile?.profilePhoto} />
+              ) : (
+                <AvatarImage src={ProfileLogo} />
+              )}
             </Avatar>
             <div>
               <h1 className="font-medium text-xl">{user?.fullname}</h1>
@@ -35,7 +39,11 @@ const Profile = () => {
             </div>
           </div>
 
-          <Button onClick={() => setOpen(true)} className="text-right" variant="outline">
+          <Button
+            onClick={() => setOpen(true)}
+            className="text-right"
+            variant="outline"
+          >
             <Pen />
           </Button>
         </div>
@@ -52,9 +60,10 @@ const Profile = () => {
         <div className="  gap-2">
           <h1 className="font-semibold text-lg">Skills</h1>
           <div className="flex items-center my-2 gap-1">
-            {
-            user?.profile?.length !== 0 ? (
-              user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>)
+            {user?.profile?.length !== 0 ? (
+              user?.profile?.skills.map((item, index) => (
+                <Badge key={index}>{item}</Badge>
+              ))
             ) : (
               <span>NA</span>
             )}
@@ -65,6 +74,7 @@ const Profile = () => {
           {isResume ? (
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href={user?.profile?.resume}
               className="text-blue-500 hover:underline cursor-pointer"
             >
@@ -74,14 +84,13 @@ const Profile = () => {
             <span>NA</span>
           )}
         </div>
-        
       </div>
       <div className="max-w-4xl mx-auto bg-white rounded-2xl">
-          <h1 className="font-bold text-lg  my-5">Applied Jobs</h1>
-          {/* Applied Job Tabel */}
-          <AppliedJobTabel />
-        </div>
-        <UpdateProfileDialog open={open} setOpen={setOpen} />
+        <h1 className="font-bold text-lg  my-5">Applied Jobs</h1>
+        {/* Applied Job Tabel */}
+        <AppliedJobTabel />
+      </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };
