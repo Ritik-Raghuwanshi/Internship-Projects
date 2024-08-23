@@ -12,11 +12,11 @@ const category = [
     "FullStack Developer"
 ]
 
-const CategoryCarousel = (query) => {
+const CategoryCarousel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const searchJobHandler = () => {
+  const searchJobHandler = (query) => {
     dispatch(setSearchedQuery(query));
     navigate("/browse");
   }
