@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import { Button } from "../ui/button";
@@ -14,7 +14,7 @@ import { Loader2 } from "lucide-react";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector(store => store.auth);
+  const { loading, user } = useSelector(store => store.auth);
     const navigate = useNavigate();
     const [input, setInput] = useState({
         fullname:'',
@@ -65,6 +65,12 @@ const Signup = () => {
           dispatch(setLoading(false));
         }
     }
+
+    useEffect(() => {
+      if (user) {
+        navigate("/");
+      }
+    }, [])
 
   return (
     <div>
