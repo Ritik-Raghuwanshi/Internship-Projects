@@ -71,18 +71,18 @@ const PostJob = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-screen my-5 ">
+      <div className="flex items-center justify-center w-full my-5 px-4">
         <form
           onSubmit={submitHandler}
-          className="p-8 max-w-4xl border border-gray-200 shadow-lg bg-gradient-to-b rounded-lg from-black/0 via-black/2 to-slate-500/15"
+          className="p-6 max-w-lg sm:max-w-2xl md:max-w-4xl border border-gray-200 shadow-lg bg-gradient-to-b rounded-lg from-black/0 via-black/2 to-slate-500/15"
         >
-          <div className="grid grid-cols-2 gap-2 ">
-            <div className=''>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
               <Label>Title</Label>
               <Input
                 type="text"
                 name="title"
-                value={input.name}
+                value={input.title}
                 onChange={changeEventHandler}
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
               />
@@ -158,30 +158,31 @@ const PostJob = () => {
               />
             </div>
             {companies.length > 0 && (
-              <Select onValueChange={selectChangeHandler}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a Company" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {companies.map((company) => {
-                      return (
+              <div className="col-span-2">
+                <Label>Company</Label>
+                <Select onValueChange={selectChangeHandler}>
+                  <SelectTrigger className="w-full sm:w-[200px]">
+                    <SelectValue placeholder="Select a Company" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {companies.map((company) => (
                         <SelectItem
                           key={company._id}
                           value={company?.name?.toLowerCase()}
                         >
                           {company.name}
                         </SelectItem>
-                      );
-                    })}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             )}
           </div>
           {loading ? (
             <Button className="w-full my-4">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> please wait
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
             </Button>
           ) : (
             <Button type="submit" className="w-full my-4 bg-gradient-to-r from-black to-slate-300">

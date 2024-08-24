@@ -34,60 +34,75 @@ const ApplicantsTable = () => {
     }
   }
   return (
-    <div>
-      <Table>
-        <TableCaption>A list of your recent applied user</TableCaption>
+    <div className="overflow-x-auto">
+      <Table className="min-w-full">
+        <TableCaption>A list of your recent applied users</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Full Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Resume</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="px-2 text-sm md:text-md">Full Name</TableHead>
+            <TableHead className="px-2 text-sm md:text-md">Email</TableHead>
+            <TableHead className="px-2 text-sm md:text-md">Contact</TableHead>
+            <TableHead className="px-2 text-sm md:text-md">Resume</TableHead>
+            <TableHead className="px-2 text-sm md:text-md">Date</TableHead>
+            <TableHead className="px-2 text-right text-sm md:text-md">
+              Action
+            </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className='bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15'>
+        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
           {applicants &&
             applicants?.applications?.map((item) => (
-              <tr key={item._id}>
-                <TableCell>{item?.applicant?.fullname}</TableCell>
-                <TableCell>{item?.applicant?.email}</TableCell>
-                <TableCell>{item?.applicant?.phoneNumber}</TableCell>
-                <TableCell>
-                    {
-                        item?.applicant?.profile?.resume ? (
-                        <a
-                            href={item?.applicant?.profile?.resume}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 cursor-pointer"
-                          >
-                            {item?.applicant?.profile?.resumeOriginalName}
-                          </a>
-                          ) : <span>NA</span>
-                    }
-                  
+              <TableRow key={item._id}>
+                <TableCell className="px-2 text-sm md:text-md">
+                  {item?.applicant?.fullname}
                 </TableCell>
-                <TableCell>{item?.applicant?.createdAt.split('T')[0]}</TableCell>
-                <TableCell className="text-right">
+                <TableCell className="px-2 text-sm md:text-md">
+                  {item?.applicant?.email}
+                </TableCell>
+                <TableCell className="px-2 text-sm md:text-md">
+                  {item?.applicant?.phoneNumber}
+                </TableCell>
+                <TableCell className="px-2 text-sm md:text-md">
+                  {item?.applicant?.profile?.resume ? (
+                    <a
+                      href={item?.applicant?.profile?.resume}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 cursor-pointer"
+                    >
+                      {item?.applicant?.profile?.resumeOriginalName}
+                    </a>
+                  ) : (
+                    <span>NA</span>
+                  )}
+                </TableCell>
+                <TableCell className="px-2 text-sm md:text-md">
+                  {item?.applicant?.createdAt.split("T")[0]}
+                </TableCell>
+                <TableCell className="text-right px-2">
                   <Popover>
                     <PopoverTrigger>
                       <MoreHorizontal />
                     </PopoverTrigger>
-                    <PopoverContent className="w-32">
-                      {shortListingStatus.map((status, index) => {
-                        return (
-                          <div onClick={() => statusHandler(status.label, item?._id)} key={index} className="flex items-center my-1">
-                            <span className="pr-2 cursor-pointer">{status.icon}</span>
-                            <span className="cursor-pointer">{status.label}</span>
-                          </div>
-                        );
-                      })}
+                    <PopoverContent className="w-32 bg-slate-300 rounded-lg">
+                      {shortListingStatus.map((status, index) => (
+                        <div
+                          key={index}
+                          onClick={() => statusHandler(status.label, item?._id)}
+                          className="flex items-center my-1"
+                        >
+                          <span className="pr-2 cursor-pointer">
+                            {status.icon}
+                          </span>
+                          <span className="cursor-pointer">
+                            {status.label}
+                          </span>
+                        </div>
+                      ))}
                     </PopoverContent>
                   </Popover>
                 </TableCell>
-              </tr>
+              </TableRow>
             ))}
         </TableBody>
       </Table>

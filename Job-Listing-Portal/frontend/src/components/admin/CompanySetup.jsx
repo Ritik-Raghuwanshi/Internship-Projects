@@ -82,21 +82,20 @@ const CompanySetup = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-xl mx-auto my-10 bg-gradient-to-b rounded-lg p-5 from-black/5 via-black/10 to-slate-500/15">
-        <form onSubmit={submitHandler}>
-          <div className="flex items-center gap-5 p-8">
+      <div className="max-w-3xl mx-auto my-10 px-4 sm:px-6 lg:px-8">
+        <form onSubmit={submitHandler} className="bg-gradient-to-b rounded-lg p-5 from-black/5 via-black/10 to-slate-500/15">
+          <div className="flex flex-col sm:flex-row items-center gap-5 mb-6">
             <Button
               variant="outline"
-              className="flex items-center gap-2 text-gra-500 font-semibold"
-              onClick={() => navigate('/admin/companies')}
+              className="flex items-center gap-2 text-gray-500 font-semibold"
+              onClick={() => navigate("/admin/companies")}
             >
               <ArrowLeft />
               <span>Back</span>
             </Button>
-
-            <h1 className="font-bold text-xl">Company Setup</h1>
+            <h1 className="font-bold text-lg sm:text-xl lg:text-2xl">Company Setup</h1>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <Label>Company Name</Label>
               <Input
@@ -142,16 +141,20 @@ const CompanySetup = () => {
               />
             </div>
           </div>
-          {
-          loading ? (
-              <Button className='w-full my-4'>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> please wait
+          <div className="mt-6">
+            {loading ? (
+              <Button className="w-full flex items-center justify-center bg-gradient-to-r from-black to-slate-300" disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
               </Button>
             ) : (
-              <Button type="submit" className="w-full my-4 bg-gradient-to-r from-black to-slate-300">
-              Update
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-black to-slate-300"
+              >
+                Update
               </Button>
             )}
+          </div>
         </form>
       </div>
     </div>

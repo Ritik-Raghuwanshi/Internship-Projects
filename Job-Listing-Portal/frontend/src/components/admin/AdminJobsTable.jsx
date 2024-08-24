@@ -32,42 +32,52 @@ const AdminJobsTable = () => {
   }, [allAdminJobs, searchJobByText])
 
   return (
-    <div>
-      <Table>
+    <div className="overflow-x-auto">
+      <Table className="min-w-full">
         <TableCaption>A list of your recent posted jobs</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Company</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="whitespace-nowrap">Company</TableHead>
+            <TableHead className="whitespace-nowrap">Role</TableHead>
+            <TableHead className="whitespace-nowrap">Date</TableHead>
+            <TableHead className="text-right whitespace-nowrap">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className='bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15'>
+        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
           {filterJobs?.map((job) => (
-            <tr key={job._id}>
-              <TableCell>{job?.company?.name}</TableCell>
-              <TableCell>{job?.title}</TableCell>
-              <TableCell>{job?.createdAt.split("T")[0]}</TableCell>
-              <TableCell className="text-right">
+            <TableRow key={job._id} className="bg-white dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap">
+                {job?.company?.name}
+              </TableCell>
+              <TableCell className="whitespace-nowrap">{job?.title}</TableCell>
+              <TableCell className="whitespace-nowrap">
+                {job?.createdAt.split("T")[0]}
+              </TableCell>
+              <TableCell className="text-right whitespace-nowrap">
                 <Popover>
                   <PopoverTrigger>
                     <MoreHorizontal />
                   </PopoverTrigger>
                   <PopoverContent className="w-32 bg-slate-300 rounded-lg">
-                    <div onClick={() => navigate(`/admin/companies/${job._id}`)} className="flex items-center py-2 px-3 gap-2 w-fit cursor-pointer">
+                    <div
+                      onClick={() => navigate(`/admin/companies/${job._id}`)}
+                      className="flex items-center py-2 px-3 gap-2 w-fit cursor-pointer"
+                    >
                       <Edit2 className="w-4" />
-                      <span >Edit</span>
+                      <span>Edit</span>
                     </div>
                     <hr className="border border-slate-400" />
-                    <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center py-2 px-3 w-fit gap-2 cursor-pointer mt-2">
-                      <Eye className="size-5"/>
+                    <div
+                      onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)}
+                      className="flex items-center py-2 px-3 w-fit gap-2 cursor-pointer mt-2"
+                    >
+                      <Eye className="size-5" />
                       <span>Applicants</span>
                     </div>
                   </PopoverContent>
                 </Popover>
               </TableCell>
-            </tr>
+            </TableRow>
           ))}
         </TableBody>
       </Table>

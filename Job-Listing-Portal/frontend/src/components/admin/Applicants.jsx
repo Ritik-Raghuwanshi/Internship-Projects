@@ -27,15 +27,17 @@ const Applicants = () => {
         }
         fetchAllApplicants();
     },[])
-  return (
-    <div >
-      <Navbar />
-      <div className="max-w-7xl mx-28">
-        <h1 className="font-bold text-xl my-5">Applicants {applicants?.applications?.length}</h1>
-        <ApplicantsTable />
+    return (
+      <div>
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 my-5">
+          <h1 className="font-bold text-lg md:text-xl lg:text-2xl my-5">
+            Applicants ({applicants?.applications?.length || 0})
+          </h1>
+          <ApplicantsTable />
+        </div>
       </div>
-    </div>
-  )
+    );
 }
 
 export default Applicants;

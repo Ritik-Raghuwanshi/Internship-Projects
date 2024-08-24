@@ -32,8 +32,8 @@ const CompaniesTable = () => {
   }, [companies, searchCompanyByText])
 
   return (
-    <div>
-      <Table >
+    <div className="overflow-x-auto">
+      <Table className="min-w-full">
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>
           <TableRow>
@@ -43,9 +43,9 @@ const CompaniesTable = () => {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className='bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15'>
+        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
           {filterCompany?.map((company) => (
-            <tr key={company._id}>
+            <TableRow key={company._id}>
               <TableCell>
                 <Avatar>
                   <AvatarImage className="h-8 w-8 rounded-full" src={company.logo} />
@@ -59,14 +59,17 @@ const CompaniesTable = () => {
                     <MoreHorizontal />
                   </PopoverTrigger>
                   <PopoverContent className="w-32">
-                    <div onClick={() => navigate(`/admin/companies/${company._id}`)} className="flex items-center gap-2 w-fit cursor-pointer">
+                    <div
+                      onClick={() => navigate(`/admin/companies/${company._id}`)}
+                      className="flex items-center gap-2 w-fit cursor-pointer"
+                    >
                       <Edit2 className="w-4" />
                       <span>Edit</span>
                     </div>
                   </PopoverContent>
                 </Popover>
               </TableCell>
-            </tr>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
