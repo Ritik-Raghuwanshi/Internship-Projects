@@ -24,6 +24,7 @@ const HeroSection = () => {
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        height: "70vh"
       }}
     >
       <div className="flex flex-col my-10 gap-5 pl-2 md:pl-4 lg:pl-10 xl:pl-20">
