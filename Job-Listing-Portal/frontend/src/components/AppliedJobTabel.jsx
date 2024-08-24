@@ -13,20 +13,20 @@ import {
 const AppliedJobTabel = () => {
   const { allAppliedJobs } = useSelector((store) => store.job);
   return (
-    <div>
-      <Table>
-        <TableCaption>A List of Applied Jobs</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Date</TableHead>
-            <TableHead>Job Role</TableHead>
-            <TableHead>Company</TableHead>
-            <TableHead className="text-right">Status</TableHead>
+    <div >
+      <Table className="bg-gradient-to-b from-black/0 via-black/0 to-black/10">
+        <TableCaption className='my-3'>A List of Applied Jobs</TableCaption>
+        <TableHeader >
+          <TableRow >
+            <TableHead className='font-bold'>Date</TableHead>
+            <TableHead className='font-bold'>Job Role</TableHead>
+            <TableHead className='font-bold'>Company</TableHead>
+            <TableHead className="text-right font-bold">Status</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody >
           {allAppliedJobs.length <= 0 ? (
-            <span>You haven&apos;t applied any job yet.</span>
+            <span className="my-3">You haven&apos;t applied any job yet.</span>
           ) : (
             allAppliedJobs.map((appliedJob) => (
               <TableRow key={appliedJob._id}>
