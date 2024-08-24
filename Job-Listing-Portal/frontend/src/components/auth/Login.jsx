@@ -14,56 +14,70 @@ import { setLoading, setUser } from "../redux/authSlice";
 import { Loader2 } from "lucide-react";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const {loading, user} = useSelector(store => store.auth);
-    const [input, setInput] = useState({ 
-        email:'',
-        password:'',
-        role:'',
-    });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, user } = useSelector((store) => store.auth);
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    role: "",
+  });
 
-    const changeEventHandler = (e) => {
-        setInput({...input, [e.target.name]:e.target.value});
-    };
-    
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-        try {
-          dispatch(setLoading(true));
-            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                withCredentials: true ,
-            });
-            if(res.data.success) {
-              dispatch(setUser(res.data.user))
-                navigate("/"); 
-                toast.success(res.data.message);
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
-        } finally {
-          dispatch(setLoading(false));
-        }
-    }
-
-    useEffect(() => {
-      if (user) {
+    try {
+      dispatch(setLoading(true));
+      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        dispatch(setUser(res.data.user));
         navigate("/");
+        toast.success(res.data.message);
       }
-    }, [])
-    return (
-      <div>
-        <Navbar />
-        <div className="flex items-center justify-center mx-auto max-w-7xl ">
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
+  return (
+    <div>
+      <Navbar />
+      <div className="flex h-screen">
+       {/* Left Side */}
+       <div className="w-1/2 bg-black ml-6 rounded-l-lg">
+          <h1 className="text-6xl font-black text-green-500 text-right pt-40 pr-5">
+            Welcome to Your Career Hub.
+          </h1>
+          <p className="text-white text-xl text-right mt-10 pr-5">
+            Whether you&apos;re hiring or looking for your next job,{" "}
+          </p>
+          <p className="text-white text-xl text-right pr-5">
+            you&apos;ve come to the right place.
+          </p>
+        </div>
+
+        {/* Right Side (Login Form) */}
+        <div className="flex items-center justify-end w-1/2 bg-gradient-to-b from-black/5 via-black/5 to-black/15">
           <form
             onSubmit={submitHandler}
-            className="w-1/2 border border-gray-200 rounded-md p-4 my-10 "
+            className="w-full border border-gray-200 rounded-md p-4 my-10"
           >
             <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
 
@@ -115,17 +129,18 @@ const Login = () => {
                 </div>
               </RadioGroup>
             </div>
+
             {loading ? (
-              <Button className='w-full my-4'>
+              <Button className="w-full my-4">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> please wait
               </Button>
             ) : (
-              <Button type="submit" className="w-full my-4">
+              <Button type="submit" className="w-full my-4 bg-gradient-to-r from-black to-slate-300">
                 Login
               </Button>
             )}
 
-            <span className="text-sm">
+            <span className="text-sm font-semibold">
               Don&apos;t have an account?{" "}
               <Link className="text-blue-600" to="/signup">
                 Signup
@@ -134,7 +149,8 @@ const Login = () => {
           </form>
         </div>
       </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Login;
