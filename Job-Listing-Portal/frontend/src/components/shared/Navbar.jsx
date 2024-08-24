@@ -8,11 +8,18 @@ import { USER_API_END_POINT } from "../utils/constant";
 import axios from "axios";
 import { toast } from "sonner";
 import { setUser } from "../redux/authSlice";
+import { useState } from "react";
+import joblogo from "/logo.png";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   const logoutHandler = async () => {
     try {
@@ -32,32 +39,79 @@ const Navbar = () => {
 
   return (
     <div className="bg-white">
-      <div className="flex items-center justify-between mx-28 max-w-7xl h-16">
-        <div>
-          <h1 className="text-2xl font-bold">
-            Job<span className="text-indigo-500">Portal</span>
-          </h1>
-        </div>
+      <div className="flex items-center justify-between mx-4 md:mx-16 max-w-7xl h-16">
+        <Link to="/">
+          <div className="flex items-center">
+            <img src={joblogo} alt="Logo" className="h-8 mr-4 rounded-lg" />
+            <h1 className="text-2xl font-bold">
+              Job<span className="text-green-600">lia</span>
+            </h1>
+          </div>
+        </Link>
         <div className="flex items-center gap-12">
-          <ul className="flex font-medium items-center gap-5">
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="focus:outline-none">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+            {menuOpen && (
+              <ul className="absolute right-4 top-16 bg-white shadow-lg rounded-md py-2 w-48">
+                {user && user.role === "recruiter" ? (
+                  <>
+                    <li className="hover:bg-gray-100 p-2">
+                      <Link to="/admin/companies">Companies</Link>
+                    </li>
+                    <li className="hover:bg-gray-100 p-2">
+                      <Link to="/admin/jobs">Jobs</Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="hover:bg-gray-100 p-2">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="hover:bg-gray-100 p-2">
+                      <Link to="/jobs">Jobs</Link>
+                    </li>
+                    <li className="hover:bg-gray-100 p-2">
+                      <Link to="/browse">Browse</Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            )}
+          </div>
+
+          <ul className="hidden md:flex font-medium items-center gap-5">
             {user && user.role === "recruiter" ? (
               <>
-                <li className="hover:text-indigo-500">
+                <li className="hover:text-green-600">
                   <Link to="/admin/companies">Companies</Link>
                 </li>
-                <li className="hover:text-indigo-500">
+                <li className="hover:text-green-600">
                   <Link to="/admin/jobs">Jobs</Link>
                 </li>
               </>
             ) : (
               <>
-                <li className="hover:text-indigo-500">
+                <li className="hover:text-green-600">
                   <Link to="/">Home</Link>
                 </li>
-                <li className="hover:text-indigo-500">
+                <li className="hover:text-green-600">
                   <Link to="/jobs">Jobs</Link>
                 </li>
-                <li className="hover:text-indigo-500">
+                <li className="hover:text-green-600">
                   <Link to="/browse">Browse</Link>
                 </li>
               </>
@@ -65,12 +119,14 @@ const Navbar = () => {
           </ul>
 
           {!user ? (
-            <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               <Link to="/login">
                 <Button variant="outline">Login</Button>
               </Link>
               <Link to="/signup">
-                <Button>Signup</Button>
+                <Button className="bg-gradient-to-r from-black to-slate-300">
+                  Signup
+                </Button>
               </Link>
             </div>
           ) : (
@@ -89,8 +145,8 @@ const Navbar = () => {
                   )}
                 </Avatar>
               </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <div className="flex gap-2 space-y-2">
+              <PopoverContent className="w-80 bg-gradient-to-b from-black/5 via-black/5 to-black/15">
+                <div className="flex gap-2">
                   <Avatar className="cursor-pointer">
                     {user?.profile?.profilePhoto ? (
                       <AvatarImage
@@ -104,7 +160,7 @@ const Navbar = () => {
                     )}
                   </Avatar>
                   <div>
-                    <h4 className="font-medium">{user?.fullname}</h4>
+                    <h4 className="font-semibold text-lg">{user?.fullname}</h4>
                     <p className="text-sm text-muted-foreground">
                       {user?.profile?.bio}
                     </p>
@@ -121,7 +177,7 @@ const Navbar = () => {
                   )}
 
                   <div className="flex w-fit items-center cursor-pointer">
-                    <LogOut />
+                    <LogOut className="outline-none" />
                     <Button onClick={logoutHandler} variant="link">
                       Logout
                     </Button>
