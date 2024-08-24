@@ -43,7 +43,7 @@ const AdminJobsTable = () => {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className='bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15'>
           {filterJobs?.map((job) => (
             <tr key={job._id}>
               <TableCell>{job?.company?.name}</TableCell>
@@ -54,12 +54,13 @@ const AdminJobsTable = () => {
                   <PopoverTrigger>
                     <MoreHorizontal />
                   </PopoverTrigger>
-                  <PopoverContent className="w-32 bg-white">
-                    <div onClick={() => navigate(`/admin/companies/${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer">
+                  <PopoverContent className="w-32 bg-slate-300 rounded-lg">
+                    <div onClick={() => navigate(`/admin/companies/${job._id}`)} className="flex items-center py-2 px-3 gap-2 w-fit cursor-pointer">
                       <Edit2 className="w-4" />
-                      <span>Edit</span>
+                      <span >Edit</span>
                     </div>
-                    <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center w-fit gap-2 cursor-pointer bg-white mt-2">
+                    <hr className="border border-slate-400" />
+                    <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center py-2 px-3 w-fit gap-2 cursor-pointer mt-2">
                       <Eye className="size-5"/>
                       <span>Applicants</span>
                     </div>

@@ -33,7 +33,7 @@ const CompaniesTable = () => {
 
   return (
     <div>
-      <Table>
+      <Table >
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>
           <TableRow>
@@ -43,7 +43,7 @@ const CompaniesTable = () => {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className='bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15'>
           {filterCompany?.map((company) => (
             <tr key={company._id}>
               <TableCell>

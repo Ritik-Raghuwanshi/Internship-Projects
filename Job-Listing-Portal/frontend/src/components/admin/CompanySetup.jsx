@@ -82,7 +82,7 @@ const CompanySetup = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-xl mx-auto my-10">
+      <div className="max-w-xl mx-auto my-10 bg-gradient-to-b rounded-lg p-5 from-black/5 via-black/10 to-slate-500/15">
         <form onSubmit={submitHandler}>
           <div className="flex items-center gap-5 p-8">
             <Button
@@ -148,7 +148,7 @@ const CompanySetup = () => {
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> please wait
               </Button>
             ) : (
-              <Button type="submit" className="w-full my-4">
+              <Button type="submit" className="w-full my-4 bg-gradient-to-r from-black to-slate-300">
               Update
               </Button>
             )}

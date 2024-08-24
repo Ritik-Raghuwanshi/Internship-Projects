@@ -52,7 +52,7 @@ const CompanyCreate = () => {
         />
         <div className="flex items-center gap-2 my-10">
             <Button variant='outline' onClick={() => navigate('/admin/companies')}>Cancle</Button>
-            <Button onClick={registerNewCompany}>Continue</Button>
+            <Button className='bg-gradient-to-r from-black to-slate-300' onClick={registerNewCompany}>Continue</Button>
         </div>
       </div>
     </div>
