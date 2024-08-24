@@ -74,25 +74,22 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex h-screen">
+      <div className="flex flex-col lg:flex-row h-screen">
         {/* Left Side */}
-        <div className="w-1/2 bg-black ml-6 rounded-l-lg">
-          <h1 className="text-6xl font-black text-green-500 text-right pt-40 pr-5">
+        <div className="lg:w-1/2 w-full bg-black p-6 rounded-l-lg ">
+          <h1 className="text-4xl md:text-6xl font-black text-green-500 text-center lg:text-right pt-10 lg:pt-40">
             Welcome to Your Career Hub.
           </h1>
-          <p className="text-white text-xl text-right mt-10 pr-5">
-            Whether you&apos;re hiring or looking for your next job,{" "}
-          </p>
-          <p className="text-white text-xl text-right pr-5">
-            you&apos;ve come to the right place.
+          <p className="text-white text-lg lg:text-xl text-center lg:text-right mt-5 lg:mt-10">
+            Whether you're hiring or looking for your next job, you've come to the right place.
           </p>
         </div>
 
         {/* Right Side */}
-        <div className="flex w-1/2 items-center justify-center bg-gradient-to-b from-black/5 via-black/5 to-black/15">
+        <div className="flex w-full lg:w-1/2 items-center justify-center bg-gradient-to-b from-black/5 via-black/5 to-black/15 p-6">
           <form
             onSubmit={submitHandler}
-            className=" border border-gray-200 rounded-md p-4 my-10 "
+            className="w-full max-w-md border border-gray-200 rounded-md p-4 lg:my-10"
           >
             <h1 className="font-bold text-center text-2xl mb-5">Signup</h1>
             <div className="my-2">
@@ -102,7 +99,7 @@ const Signup = () => {
                 value={input.fullname}
                 name="fullname"
                 onChange={changeEventHandler}
-                placeholder="type your name"
+                placeholder="Type your name"
               />
             </div>
             <div className="my-2">
@@ -112,7 +109,7 @@ const Signup = () => {
                 value={input.email}
                 name="email"
                 onChange={changeEventHandler}
-                placeholder="type your email"
+                placeholder="Type your email"
               />
             </div>
             <div className="my-2">
@@ -122,7 +119,7 @@ const Signup = () => {
                 value={input.phoneNumber}
                 name="phoneNumber"
                 onChange={changeEventHandler}
-                placeholder="type your phone number"
+                placeholder="Type your phone number"
               />
             </div>
             <div className="my-2">
@@ -132,11 +129,11 @@ const Signup = () => {
                 value={input.password}
                 name="password"
                 onChange={changeEventHandler}
-                placeholder="type your password"
+                placeholder="Type your password"
               />
             </div>
-            <div className="flex items-center justify-between">
-              <RadioGroup className="flex items-center justify-between gap-4 my-5">
+            <div className="flex flex-col lg:flex-row items-center justify-between">
+              <RadioGroup className="flex flex-col lg:flex-row items-center justify-between gap-4 my-5 w-full">
                 <div className="flex items-center space-x-2">
                   <Input
                     type="radio"
@@ -146,7 +143,7 @@ const Signup = () => {
                     onChange={changeEventHandler}
                     className="cursor-pointer"
                   />
-                  <Label htmlFor="r1">Student</Label>
+                  <Label>Student</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Input
@@ -157,10 +154,10 @@ const Signup = () => {
                     onChange={changeEventHandler}
                     className="cursor-pointer"
                   />
-                  <Label htmlFor="r2">Recruiter</Label>
+                  <Label>Recruiter</Label>
                 </div>
               </RadioGroup>
-              <div className="flex items-center gap-2 pl-4">
+              <div className="flex items-center gap-2 lg:pl-4 w-full lg:w-auto">
                 <Label>Profile</Label>
                 <Input
                   accept="image/*"
@@ -175,7 +172,10 @@ const Signup = () => {
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               </Button>
             ) : (
-              <Button type="submit" className="w-full my-4 bg-gradient-to-r from-black to-slate-300">
+              <Button
+                type="submit"
+                className="w-full my-4 bg-gradient-to-r from-black to-slate-300"
+              >
                 Signup
               </Button>
             )}
