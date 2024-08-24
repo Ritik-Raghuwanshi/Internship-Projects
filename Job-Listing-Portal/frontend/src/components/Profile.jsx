@@ -23,7 +23,7 @@ const Profile = () => {
     <div>
       <Navbar />
       <div
-        className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8"
+        className="bg-gradient-to-b from-black/5 via-black/5 to-black/15 max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8"
         alt="profile"
       >
         <div className="flex justify-between">
@@ -36,8 +36,8 @@ const Profile = () => {
               )}
             </Avatar>
             <div>
-              <h1 className="font-medium text-xl">{user?.fullname}</h1>
-              <p>{user?.profile?.bio}</p>
+              <h1 className="font-medium text-2xl">{user?.fullname}</h1>
+              <p className="text-sm pl-1">{user?.profile?.bio}</p>
             </div>
           </div>
 
@@ -46,7 +46,7 @@ const Profile = () => {
             className="text-right"
             variant="outline"
           >
-            <Pen />
+            <Pen className="size-4" />
           </Button>
         </div>
         <div className="my-5">

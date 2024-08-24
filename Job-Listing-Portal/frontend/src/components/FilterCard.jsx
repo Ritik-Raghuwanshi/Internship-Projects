@@ -31,9 +31,9 @@ const FilterCard = () => {
   }, [dispatch, selectedValue]);
 
   return (
-    <div className="w-full bg-white p-3 rounded-md">
+    <div className="w-full bg-gradient-to-b from-black/5 via-black/10 to-black/20 p-5 ml-1 rounded-md">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
-      <hr className="mt-3" />
+      <hr className="mt-3 border-black" />
       <RadioGroup value={selectedValue} onValueChange={changeHandler}>
         {filterData.map((data, index) => (
           <div key={index}>

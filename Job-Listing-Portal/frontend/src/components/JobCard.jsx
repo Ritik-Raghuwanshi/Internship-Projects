@@ -17,7 +17,7 @@ const JobCard = ( {job} ) => {
     return Math.floor(timeDifference/ (1000*24*60*60));
   }
   return (
-    <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100 max-w-[100%]">
+    <div className="bg-gradient-to-b from-black/5 via-black/5 to-black/15 p-5 rounded-md shadow-xl bg-white border border-gray-100 max-w-[100%]">
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-500">{daysAgoFunction(job?.createdAt) === 0 ? 'Today' : `${daysAgoFunction(job?.createdAt)} days ago` }</p>
         <Button variant="outline" className="rounded-full" size="icon">
@@ -42,13 +42,13 @@ const JobCard = ( {job} ) => {
         <p className="text-sm text-gray-600">{job?.description}</p>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <Badge className="text-indigo-400 font-bold" variant="ghost">{job?.position} position</Badge>
-        <Badge className="text-red-600 font-bold" variant="ghost">{job?.jobType}</Badge>
-        <Badge className="text-violet-800 font-bold" variant="ghost">{job?.salary} LPA</Badge>
+        <Badge className="text-green-600 font-bold border border-slate-500" variant="ghost">{job?.position} position</Badge>
+        <Badge className="text-black font-bold border border-slate-500" variant="ghost">{job?.jobType}</Badge>
+        <Badge className="text-yellow-400 font-bold border border-slate-500" variant="ghost">{job?.salary} LPA</Badge>
     </div>
     <div className="flex items-center gap-4 mt-4">
-        <Button onClick={() => navigate(`/description/${job?._id}`)} variant="outline">Details</Button>
-        <Button variant="outline">Save for later</Button>
+        <Button onClick={() => navigate(`/description/${job?._id}`)} variant="outline" className='bg-gray-100 hover:bg-gray-200'>Details</Button>
+        <Button variant="secondary" className='bg-gradient-to-r from-black to-slate-300 text-white'>Save for later</Button>
     </div>
     </div>
   );

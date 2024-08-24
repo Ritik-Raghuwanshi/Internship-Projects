@@ -8,12 +8,12 @@ const LatestJobs = () => {
 
   return (
     <div className="max-w-7xl mx-20 my-20">
-      <h1 className="text-4xl font-bold"><span className="text-indigo-400">Latest & Top</span>Job Openings</h1>
+      <h1 className="text-4xl font-bold"><span className="text-green-600">Latest & Top</span>Job Openings</h1>
 
       {/* cards */}
       <div className="grid grid-cols-3 gap-4 my-5">
       {
-        allJobs.length <= 0 ? <span>No Job Available</span> : allJobs.slice(0, 6).map((job) => (
+        allJobs.length <= 0 ? <span className="text-lg font-semibold">No Job Available</span> : allJobs.slice(0, 6).map((job) => (
             <LatestJobCards key={job._id} job={job} />
         ))
       }
