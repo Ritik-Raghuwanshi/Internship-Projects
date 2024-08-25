@@ -58,7 +58,7 @@ const AdminJobsTable = () => {
                   <PopoverTrigger>
                     <MoreHorizontal />
                   </PopoverTrigger>
-                  <PopoverContent className="w-32 rounded-lg">
+                  <PopoverContent className="w-32 rounded-lg bg-slate-300">
                     <div
                       onClick={() => navigate(`/admin/companies/${job._id}`)}
                       className="flex items-center py-2 px-3 gap-2 w-fit cursor-pointer"
