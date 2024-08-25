@@ -32,8 +32,8 @@ const AdminJobsTable = () => {
   }, [allAdminJobs, searchJobByText])
 
   return (
-    <div className="overflow-x-auto">
-      <Table className="min-w-full">
+    <div className="overflow-x-auto ">
+      <Table className="min-w-full bg-slate-200 ">
         <TableCaption>A list of your recent posted jobs</TableCaption>
         <TableHeader>
           <TableRow>
@@ -43,22 +43,22 @@ const AdminJobsTable = () => {
             <TableHead className="text-right whitespace-nowrap">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
+        <TableBody className="rounded-lg p-5 bg-slate-100">
           {filterJobs?.map((job) => (
-            <TableRow key={job._id} className="bg-white dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap">
+            <TableRow key={job._id} className="">
+              <TableCell className="whitespace-nowrap ">
                 {job?.company?.name}
               </TableCell>
-              <TableCell className="whitespace-nowrap">{job?.title}</TableCell>
-              <TableCell className="whitespace-nowrap">
+              <TableCell className="whitespace-nowrap ">{job?.title}</TableCell>
+              <TableCell className="whitespace-nowrap ">
                 {job?.createdAt.split("T")[0]}
               </TableCell>
-              <TableCell className="text-right whitespace-nowrap">
+              <TableCell className="text-right whitespace-nowrap ">
                 <Popover>
                   <PopoverTrigger>
                     <MoreHorizontal />
                   </PopoverTrigger>
-                  <PopoverContent className="w-32 bg-slate-300 rounded-lg">
+                  <PopoverContent className="w-32 rounded-lg">
                     <div
                       onClick={() => navigate(`/admin/companies/${job._id}`)}
                       className="flex items-center py-2 px-3 gap-2 w-fit cursor-pointer"

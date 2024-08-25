@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux";
 import { setSearchCompanyByText } from "../redux/companySlice";
 
 const Companies = () => {
+
+  document.title = 'Joblia | Admin'
+
   useGetAllCompanies();
   const [input, setInput] = useState("");
   const navigate = useNavigate();

@@ -33,7 +33,7 @@ const CompaniesTable = () => {
 
   return (
     <div className="overflow-x-auto">
-      <Table className="min-w-full">
+      <Table className="min-w-full bg-slate-200">
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>
           <TableRow>
@@ -43,7 +43,7 @@ const CompaniesTable = () => {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
+        <TableBody className="rounded-lg p-5 bg-slate-100">
           {filterCompany?.map((company) => (
             <TableRow key={company._id}>
               <TableCell>

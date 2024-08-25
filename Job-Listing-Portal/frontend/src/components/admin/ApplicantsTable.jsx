@@ -49,7 +49,7 @@ const ApplicantsTable = () => {
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="bg-gradient-to-b rounded-lg p-5 from-black/0 via-black/2 to-slate-500/15">
+        <TableBody className="rounded-lg p-5 bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15">
           {applicants &&
             applicants?.applications?.map((item) => (
               <TableRow key={item._id}>

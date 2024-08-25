@@ -83,7 +83,7 @@ const CompanySetup = () => {
     <div>
       <Navbar />
       <div className="max-w-3xl mx-auto my-10 px-4 sm:px-6 lg:px-8">
-        <form onSubmit={submitHandler} className="bg-gradient-to-b rounded-lg p-5 from-black/5 via-black/10 to-slate-500/15">
+        <form onSubmit={submitHandler} className="rounded-lg p-5 bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15">
           <div className="flex flex-col sm:flex-row items-center gap-5 mb-6">
             <Button
               variant="outline"
