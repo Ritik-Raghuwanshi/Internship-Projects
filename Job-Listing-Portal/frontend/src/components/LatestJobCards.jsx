@@ -5,7 +5,7 @@ import { Badge } from "./ui/badge";
 const LatestJobCards = ( {job} ) => {
   const navigate = useNavigate();
   return (
-    <div onClick={() => navigate(`/description/${job._id}`)} className="bg-gradient-to-b from-black/5 via-black/5 to-black/15 p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
+    <div onClick={() => navigate(`/description/${job._id}`)} className="bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15  p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
       <div>
       <h1 className="font-medium text-lg">{job?.company?.name}</h1>
       <p className="text-base text-gray-500">India</p>

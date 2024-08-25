@@ -14,7 +14,7 @@ const AppliedJobTabel = () => {
   const { allAppliedJobs } = useSelector((store) => store.job);
   return (
     <div >
-      <Table className="bg-gradient-to-b from-black/0 via-black/0 to-black/10">
+      <Table className="bg-slate-200">
         <TableCaption className='my-3'>A List of Applied Jobs</TableCaption>
         <TableHeader >
           <TableRow >
@@ -24,7 +24,7 @@ const AppliedJobTabel = () => {
             <TableHead className="text-right font-bold">Status</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody >
+        <TableBody className='bg-slate-100' >
           {allAppliedJobs.length <= 0 ? (
             <span className="my-3">You haven&apos;t applied any job yet.</span>
           ) : (

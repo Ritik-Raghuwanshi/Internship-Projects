@@ -17,7 +17,7 @@ const JobCard = ( {job} ) => {
     return Math.floor(timeDifference/ (1000*24*60*60));
   }
   return (
-    <div className="bg-gradient-to-b from-black/5 via-black/5 to-black/15 p-4 sm:p-5 rounded-md shadow-xl bg-white border border-gray-100 w-full">
+    <div className="bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15 p-4 sm:p-5 rounded-md shadow-xl bg-white border border-gray-100 w-full">
       <div className="flex items-center justify-between">
         <p className="text-xs sm:text-sm text-gray-500">
           {daysAgoFunction(job?.createdAt) === 0

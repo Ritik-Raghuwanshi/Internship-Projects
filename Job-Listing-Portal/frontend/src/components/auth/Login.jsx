@@ -14,6 +14,9 @@ import { setLoading, setUser } from "../redux/authSlice";
 import { Loader2 } from "lucide-react";
 
 const Login = () => {
+  
+  document.title = 'Joblia | Login'
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, user } = useSelector((store) => store.auth);
@@ -74,7 +77,7 @@ const Login = () => {
         </div>
 
         {/* Right Side (Login Form) */}
-        <div className="flex flex-col items-center justify-center w-full md:w-1/2 bg-gradient-to-b from-black/5 via-black/5 to-black/15 p-4">
+        <div className="flex flex-col items-center justify-center w-full md:w-1/2 bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15 p-4">
           <form
             onSubmit={submitHandler}
             className="w-full max-w-md bg-white border border-gray-200 rounded-md p-6 md:p-8"

@@ -23,7 +23,7 @@ const Profile = () => {
     <div>
       <Navbar />
       <div
-        className="bg-gradient-to-b from-black/5 via-black/5 to-black/15 max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8"
+        className="bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15  max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8"
         alt="profile"
       >
         <div className="flex justify-between">

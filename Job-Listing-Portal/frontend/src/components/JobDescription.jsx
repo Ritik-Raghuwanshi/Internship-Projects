@@ -52,7 +52,7 @@ const JobDescription = () => {
   }, [jobId, dispatch, user?._id])
 
   return (
-    <div className="max-w-7xl mx-28 my-10 bg-gradient-to-b p-5 rounded-lg from-black/5 via-black/10 to-black/20">
+    <div className="max-w-7xl mx-28 my-10 p-5 rounded-lg bg-gradient-to-b from-slate-300/5 via-slate-400/5 to-slate-500/15 ">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-bold text-xl">{singleJob?.title}</h1>

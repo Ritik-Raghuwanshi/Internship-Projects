@@ -145,7 +145,7 @@ const Navbar = () => {
                   )}
                 </Avatar>
               </PopoverTrigger>
-              <PopoverContent className="w-80 bg-gradient-to-b from-black/5 via-black/5 to-black/15">
+              <PopoverContent className="w-80 bg-gradient-to-b from-slate-300/5 via-slate-300/5 to-slate-500/15">
                 <div className="flex gap-2">
                   <Avatar className="cursor-pointer">
                     {user?.profile?.profilePhoto ? (

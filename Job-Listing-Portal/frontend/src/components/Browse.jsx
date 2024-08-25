@@ -8,6 +8,9 @@ import { setSearchedQuery } from "./redux/jobSlice";
 // const randomJobs = [1, 2, 3];
 
 const Browse = () => {
+
+  document.title = 'Joblia | Browse'
+
   useGetAllJobs();
   const {allJobs} = useSelector(store=>store.job);
   const dispatch = useDispatch();

@@ -20,7 +20,7 @@ const HeroSection = () => {
     <div
       className="border border-white"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.2), rgba(0,0,0,.3)), url(${Jobbg})`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,.2)), url(${Jobbg})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -28,7 +28,7 @@ const HeroSection = () => {
       }}
     >
       <div className="flex flex-col my-10 gap-5 pl-2 md:pl-4 lg:pl-10 xl:pl-20">
-        <span className="px-4 py-2 text-lg rounded-full bg-white/40 w-fit font-semibold">
+        <span className="px-4 py-2 text-lg rounded-full bg-slate-100 border border-slate-200 w-fit font-semibold">
           No 1 Job Hunt Website
         </span>
         <h1 className="text-5xl font-bold py-2 md:text-4xl lg:text-5xl xl:text-6xl">
