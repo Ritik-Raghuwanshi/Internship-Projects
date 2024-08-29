@@ -1,3 +1,3 @@
 # InternShip Projects
 
-# 1) Jobelia - Job-Listing-Portal
+# 1) Joblia - Job-Listing-Portal
