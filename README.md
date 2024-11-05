@@ -1,5 +1,5 @@
 # InternShip Projects
 
-# 1) Joblia - Job-Listing-Portal
+# 1) Joblia 
 
 # 2) Result Management System
