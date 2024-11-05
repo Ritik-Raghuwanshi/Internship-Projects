@@ -17,12 +17,24 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
  
-const corsOptions = {
-    // origin: 'http://localhost:5173',
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://job-listing-portal-frontend.onrender.com'
+];
 
-    origin: 'https://job-listing-portal-frontend.onrender.com',
-    credentials: true,
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // if you are using cookies or other credentials
 };
+
+app.use(cors(corsOptions));
+
 
 app.use(cors(corsOptions));
 
